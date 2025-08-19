@@ -1,5 +1,5 @@
 {
-  "name": "tauri-plugin-android-tv-check-api",
+  "name": "@smbcloud/tauri-plugin-android-tv-check-api",
   "version": "1.1.0",
   "author": "setoelkahfi@gmail.com",
   "description": "",
@@ -29,5 +29,8 @@
     "rollup": "^4.46.3",
     "tslib": "^2.8.1",
     "typescript": "^5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
