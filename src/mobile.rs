@@ -16,6 +16,8 @@ pub fn init<R: Runtime, C: DeserializeOwned>(
 ) -> crate::Result<AndroidTvCheck<R>> {
     #[cfg(target_os = "android")]
     let handle = api.register_android_plugin(PLUGIN_IDENTIFIER, "AndroidTvCheckPlugin")?;
+    #[cfg(target_os = "ios")]
+    let handle = api.register_ios_plugin(PLUGIN_IDENTIFIER, "AndroidTvCheckPlugin")?;
     Ok(AndroidTvCheck(handle))
 }
 
@@ -24,6 +26,13 @@ pub struct AndroidTvCheck<R: Runtime>(PluginHandle<R>);
 
 impl<R: Runtime> AndroidTvCheck<R> {
     pub fn check(&self) -> crate::Result<CheckResponse> {
+        #[cfg(target_os = "ios")]
+        {
+            return Err(crate::Error::PluginNotSupportedOnPlatform(
+                "tauri-plugin-android-tv-check is not supported on iOS".into(),
+            ));
+        }
+
         match self.0.run_mobile_plugin("check", ()) {
             Ok(res) => {
                 println!("tauri-plugin-android-tv-check: {:?}", res);
