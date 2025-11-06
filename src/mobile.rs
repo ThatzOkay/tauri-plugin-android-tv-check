@@ -6,7 +6,6 @@ use tauri::{
 
 use crate::models::*;
 
-#[cfg(target_os = "android")]
 const PLUGIN_IDENTIFIER: &str = "com.plugin.androidTvCheck";
 
 // initializes the Kotlin or Swift plugin classes
