@@ -28,9 +28,7 @@ impl<R: Runtime> AndroidTvCheck<R> {
     pub fn check(&self) -> crate::Result<CheckResponse> {
         #[cfg(target_os = "ios")]
         {
-            return Err(crate::Error::PluginNotSupportedOnPlatform(
-                "tauri-plugin-android-tv-check is not supported on iOS".into(),
-            ));
+            return Ok(CheckResponse { is_android_tv: false });
         }
 
         match self.0.run_mobile_plugin("check", ()) {
